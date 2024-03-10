@@ -1,24 +1,7 @@
-# CHALLENGE - Gerador de senha SEGURA. 
+from colorama import init, Fore
 
-# - Esse gerador deve conter:
-#     - Uma funcionalidade que gere senhas novas
-#     - Uma funcionalidade que torne uma senha existente segura se ela não for.
-#     - Uma funcionalidade que dada uma senha, diz se ela é segura ou não.
-
-# ### REGRAS:
-
-# - O código precisa estar no github. (Crie um repositório público com o projeto).
-# - As funcionalidades precisam estar em funções.
-# - Uma senha segura deve conter:
-#     - Letra maiúscula
-#     - Letra minúscula
-#     - Números
-#     - Simbolos (@#$%¨&*)
-
-#  ||||||| FUNÇÕES  |||||||
-
-
-
+# Inicializa o colorama para sistemas Windows
+init()
 
 def criar_nova_senha():
     print(" =================================================")
@@ -35,23 +18,23 @@ def criar_nova_senha():
 
     # Verifica o comprimento da senha
     if len(password) < 8:
-        print('Sua senha deve conter mais de 8 caracteres!')
+        print('1 - Sua senha deve conter mais de 8 caracteres!')
 
     # Verifica se a senha contém letras maiúsculas
     if not any(char.isupper() for char in password):
-        print('Sua senha deve conter pelo menos uma letra maiúscula!')
+        print('2 - Sua senha deve conter pelo menos uma letra maiúscula!')
 
     # Verifica se a senha contém letras minúsculas
     if not any(char.islower() for char in password):
-        print('Sua senha deve conter pelo menos uma letra minúscula!')
+        print('3 - Sua senha deve conter pelo menos uma letra minúscula!')
 
     # Verifica se a senha contém números
     if not any(char.isdigit() for char in password):
-        print('Sua senha deve conter pelo menos um número!')
+        print('4 - Sua senha deve conter pelo menos um número!')
 
     # Verifica se a senha contém símbolos
     if not any(char in '@#$%¨&*' for char in password):
-        print('Sua senha deve conter pelo menos um símbolo (@#$%¨&*)!')
+        print('5 - 1Sua senha deve conter pelo menos um símbolo (@#$%¨&*)!')
  
 
 def tratar_senha_fraca():
@@ -93,7 +76,18 @@ def menu():
     print(" =================================================")
 
     while True:
+        print(" =================================================")
+        print(" ||                                             ||")
+        print(" ||   Selecione uma opção:                      ||")
+        print(" ||                                             ||")
+        print(" ||   1. Criar Nova Senha                       ||")
+        print(" ||   2. Tratar senha fraca deixando mais forte ||")
+        print(" ||   3. Verifica se a senha é segura ou não    ||")
+        print(" ||   0. Sair                                   ||")
+        print(" ||                                             ||")
+        print(" =================================================")
         escolha = input("Digite o número da opção desejada: ")
+
 
         if escolha == "1":
             criar_nova_senha()
