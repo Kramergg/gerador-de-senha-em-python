@@ -17,6 +17,9 @@
 
 #  ||||||| FUNÇÕES  |||||||
 
+
+
+
 def criar_nova_senha():
     print(" =================================================")
     print(" ||             INSTRUÇÕES OPÇÃO 1:              ||")
@@ -28,15 +31,28 @@ def criar_nova_senha():
     print(" ||           -- Simbolos (@#$%¨&*)              ||")
     print(" ||                                              ||")
     print(" ==================================================")
-    password = input('Digite sua senha com base nos requisitos')
+    password = input('Digite sua senha com base nos requisitos: ')
 
+    # Verifica o comprimento da senha
+    if len(password) < 8:
+        print('Sua senha deve conter mais de 8 caracteres!')
+
+    # Verifica se a senha contém letras maiúsculas
+    if not any(char.isupper() for char in password):
+        print('Sua senha deve conter pelo menos uma letra maiúscula!')
+
+    # Verifica se a senha contém letras minúsculas
+    if not any(char.islower() for char in password):
+        print('Sua senha deve conter pelo menos uma letra minúscula!')
+
+    # Verifica se a senha contém números
+    if not any(char.isdigit() for char in password):
+        print('Sua senha deve conter pelo menos um número!')
+
+    # Verifica se a senha contém símbolos
+    if not any(char in '@#$%¨&*' for char in password):
+        print('Sua senha deve conter pelo menos um símbolo (@#$%¨&*)!')
  
-
-
-
-
-
-
 
 def tratar_senha_fraca():
     print(" =================================================")
