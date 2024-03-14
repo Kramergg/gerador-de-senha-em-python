@@ -59,7 +59,7 @@ def criar_nova_senha():
 
 
 def tratar_senha_fraca():
-    print(Color.MAGENTA+" =================================================")
+    print(Color.MAGENTA + " =================================================")
     print(" ||             INSTRUÇÕES OPÇÃO 2:              ||")
     print(" ||                                              ||")
     print(" ||   - Você deve colocar sua senha existente:   ||")
@@ -67,8 +67,55 @@ def tratar_senha_fraca():
     print(" ||                                              ||")
     print(" ||                                              ||")
     print(" ==================================================")
-    password = input( Color.BOLD +'Digite sua senha com base nos requisitos: ' + Color.END)
-    
+    password = input(Color.BOLD + 'Digite sua senha com base nos requisitos: ' + Color.END)
+
+    # Define os conjuntos de caracteres para cada tipo de caractere
+    letras_maiusculas = string.ascii_uppercase
+    letras_minusculas = string.ascii_lowercase
+    numeros = string.digits
+    simbolos = '@#$%¨&*'
+
+    # Inicializa as variáveis para armazenar os caracteres faltantes
+    faltantes = {'maiusculas': '', 'minusculas': '', 'numeros': '', 'simbolos': ''}
+
+    # Verifica se a senha contém letras maiúsculas
+    if not any(char.isupper() for char in password):
+        faltantes['maiusculas'] = random.choice(letras_maiusculas)
+
+    # Verifica se a senha contém letras minúsculas
+    if not any(char.islower() for char in password):
+        faltantes['minusculas'] = random.choice(letras_minusculas)
+
+    # Verifica se a senha contém números
+    if not any(char.isdigit() for char in password):
+        faltantes['numeros'] = random.choice(numeros)
+
+    # Verifica se a senha contém símbolos
+    if not any(char in '@#$%¨&*' for char in password):
+        faltantes['simbolos'] = random.choice(simbolos)
+
+    # Combinar a senha antiga com os caracteres faltantes
+    nova_senha = password + ''.join(faltantes.values())
+
+    # Verifica se a senha tem menos de 15 caracteres
+    if len(nova_senha) < 15:
+        # Calcula quantos caracteres adicionais são necessários
+        caracteres_faltantes = 15 - len(nova_senha)
+        # Adiciona caracteres aleatórios até atingir o mínimo de 15 caracteres
+        for _ in range(caracteres_faltantes):
+            nova_senha += random.choice(string.ascii_letters + string.digits + '@#$%¨&*')
+
+    print(Color.GREEN + " ==================================================")
+    print(" ||                                              ||")
+    print(" ||           SENHA TRATADA COM SUCESSO!          ||")
+    print(" ||                                              ||")
+    print(Color.BOLD + "               "+nova_senha+"               "+  Color.END)
+    print(Color.GREEN + " ||                                              ||")
+    print(" ||                                              ||")
+    print(" =================================================="+ Color.END)
+
+
+
 
 def verifica_senha_segura():
     print(Color.MAGENTA+" =================================================")
@@ -81,8 +128,39 @@ def verifica_senha_segura():
     print(" ==================================================")
     password = input('Digite sua senha com base nos requisitos: ')
 
+    # Define os conjuntos de caracteres para cada tipo de caractere
+    letras_maiusculas = string.ascii_uppercase
+    letras_minusculas = string.ascii_lowercase
+    numeros = string.digits
+    simbolos = '@#$%¨&*'
 
+    # Verifica se a senha contém pelo menos uma letra maiúscula
+    if not any(char in letras_maiusculas for char in password):
+        print(Color.RED + "A senha não contém letra maiúscula." + Color.RED)
+        return
 
+    # Verifica se a senha contém pelo menos uma letra minúscula
+    if not any(char in letras_minusculas for char in password):
+        print(Color.RED + "A senha não contém letra minúscula." + Color.RED)
+        return
+
+    # Verifica se a senha contém pelo menos um número
+    if not any(char in numeros for char in password):
+        print(Color.RED + "A senha não contém número." + Color.RED)
+        return
+
+    # Verifica se a senha contém pelo menos um símbolo
+    if not any(char in simbolos for char in password):
+        print(Color.RED + "A senha não contém símbolo." + Color.RED)
+        return
+
+    # Se a senha passou por todas as verificações, é considerada segura
+    print(Color.GREEN + " ==================================================")
+    print(" ||                                              ||")
+    print(" ||                  SENHA SEGURA!               ||")
+    print(" ||                                              ||")
+    print(" ||                                              ||")
+    print(" =================================================="+ Color.END)
 
 #  ||||||| MENU |||||||
 
